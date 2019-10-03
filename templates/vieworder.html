@@ -1,0 +1,99 @@
+{% extends 'admin.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+
+    <form class="form-horizontal" role="form" method="POST">{% csrf_token %}
+        <h2>ORDER</h2>
+
+        <table>
+
+
+            <div class="form-group">
+                <tr>
+                    <td><label>Admission Number</label></td>
+                    <div class="col-sm-9">
+                        <td><input type="text" id="admissionnumber" placeholder="Admission Number"
+                                   name="admissionnumber"
+                                   class="form-control" autofocus=""></td>
+                    </div>
+                </tr>
+            </div>
+
+
+            <div class="form-group">
+                <tr>
+                    <td><label>Book Name</label></td>
+                    <div class="col-sm-9">
+                        <td><input type="text" id="bookname" placeholder="Enter book name" class="form-control"
+                                   name="bookname">
+                        </td>
+                    </div>
+                </tr>
+            </div>
+        </table>
+        <td><input type="submit" value="issue" name="issue"></td>
+        <td><input type="submit" value="return" name="return"></td>
+    </form>
+    <br>
+    <table style="width:100%" border="1">
+
+        <!-- Main content -->
+        <section class="content">
+    <div class="row">
+        <div class="col-12">
+
+                <!-- /.card-header -->
+
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                                <tr>
+                                    <th>Admission Number</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Book Name</th>
+                                    <th>Issue date</th>
+                                    <th>Return date</th>
+
+                                </tr>
+                        </thead>
+                        <tbody>
+                                {% for i in key %}
+                                <tr>
+                                    <td>{{i.student.AdmissionNumber}}</td>
+                                    <td>{{i.student.FirstName}}</td>
+                                    <td>{{i.student.LastName}}</td>
+                                    <td>{{i.BookName}}</td>
+                                    <td>{{i.issuedate}}</td>
+                                    <td>{{i.returndate}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+
+                            <input type="text" value= "{{key1 }}" id="key1" hidden>
+
+
+
+                            <!--<table style="width:100%" border="1">-->
+
+                        </tbody>
+
+                    </table>
+
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+ {% endblock %}
+{% block script %}
+<script>
+ var x=document.getElementById("key1").value;
+ if (x=="yes"){
+    alert("Not available")}
+else if(x=="No"){
+    alert("No such books")}
+</script>
+{% endblock %}

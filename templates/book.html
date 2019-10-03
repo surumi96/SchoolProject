@@ -1,0 +1,116 @@
+{% extends 'admin.html' %}
+{% load staticfiles %}
+{% block content %}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Book</h1>
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+
+<div class="card">
+            <div class="card-header">
+<form method="post">{% csrf_token %}
+    <input type="submit" name="add" value="Add books" style="float: right;">
+</form>
+            </div>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+
+    <tr>
+        <th>Book id</th>
+        <th>Book Name</th>
+        <th>Author</th>
+        <th>Number</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    {% for i in key %}
+    <tr>
+
+    <td>{{i.id}}</td>
+        <td>{{i.BookName}}</td>
+    <td>{{i.AuthorName}}</td>
+    <td>{{i.Number}}</td>
+        <td><form method ='post'>{% csrf_token %}
+            <button type="submit">Delete</button>
+            <input name="delete" value="{{i.id}}" hidden>
+        </form>
+        </td>
+        <td>
+            <a href="/school/editbook/{{i.id}}/">
+            <button type="submit">Edit</button>
+                </a>
+        </td>
+    </tr>
+    {% endfor %}
+ </table>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<!-- /.content-wrapper -->
+
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+
+</script>
+</body>
+</html>
+
+{% endblock %}
+
+

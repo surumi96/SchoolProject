@@ -1,0 +1,16 @@
+{% extends 'admin.html' %}
+{% block content %}
+<form method="post">{% csrf_token %}
+
+    <label for="uname"><b>Academic year</b></label>
+    <input type="text" name="academicyear" required>
+
+   <label for="uname"><b>startson</b></label>
+ <input type="date" name="startson" required>
+    <label for="uname"><b>Endson</b></label>
+ <input type="date" name="endson" required>
+<!--    <label for="uname"><b>Description</b></label>-->
+<!-- <input type="text" name="description" required>-->
+<button type="submit">Submit</button>
+</form>
+ {% endblock %}

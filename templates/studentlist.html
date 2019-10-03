@@ -1,0 +1,52 @@
+{% extends 'admin.html' %}
+{% load staticfiles %}
+{% block content %}
+<table style="width:100%" border="1">
+    <tr>
+        <th> id</th>
+        <th>Admission No</th>
+        <th>Admission Year</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>DOB</th>
+        <th>Blood Group</th>
+        <th>Phone No</th>
+        <th>Contact Details</th>
+        <th>Gender</th>
+        <th>RollNo</th>
+        <th>Batch</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    {% for i in key %}
+    <tr>
+
+    <td>{{i.id}}</td>
+        <td>{{i.AdmissionNumber}}</td>
+    <td>{{i.AdmissionYear}}</td>
+    <td>{{i.FirstName}}</td>
+        <td>{{i.LastName}}</td>
+        <td>{{i.Email}}</td>
+        <td>{{i.DOB}}</td>
+        <td>{{i.BloodGroup}}</td>
+        <td>{{i.PhoneNumber}}</td>
+        <td>{{i.ContactDetails}}</td>
+            <td>{{i.Gender}}</td>
+        <td>{{i.RollNo}}</td>
+        <td>{{i.Batch}}</td>
+
+        <td><form method ='post'>{% csrf_token %}
+            <button type="submit">Delete</button>
+            <input name="delete" value="{{i.id}}" hidden>
+        </form>
+        </td>
+        <td>
+            <a href="/school/editstudent/{{i.id}}/">
+            <button type="submit">Edit</button>
+                </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+{% endblock %}

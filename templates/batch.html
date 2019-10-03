@@ -1,0 +1,30 @@
+{% extends 'admin.html' %}
+{% block content %}
+<form method="post">{% csrf_token %}
+    <label for="uname"><b>Academic Year</b></label>
+    <select name="academicyear">
+        {% for i in key1 %}
+        <option value="{{i.academicyearname}}">{{ i.academicyearname }}</option>
+        {% endfor %}
+    </select>
+    <label for="uname"><b>Course</b></label>
+    <select name="course">
+        {% for i in key2 %}
+        <option value="{{i.id}}">{{ i.coursename }}</option>
+        {% endfor %}
+    </select>
+
+
+        <label for="uname"><b>batch name</b></label>
+        <select name="batch name">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+
+        <!--    <label for="uname"><b>Description</b></label>-->
+        <!-- <input type="text" name="description" required>-->
+        <button type="submit">Submit</button>
+</form>
+{% endblock %}
