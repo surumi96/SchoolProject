@@ -1,0 +1,99 @@
+{% extends 'admin.html' %}
+{% block content %}
+        <title>Fee Category</title>
+    </head>
+    <h1>ADD</h1>
+
+        <body>
+    <form method='post'>{% csrf_token %}
+        <label for="uname"><b>Admission number</b></label>
+    <select name="admissionnumber">
+        {% for i in key1 %}
+                            <option value="{{ i.id }}">{{ i.AdmissionNumber }}</option>
+{% endfor %}
+
+    </select><br>
+        <label for="uname"><b>course</b></label>
+    <select name="course">
+        {% for i in key2 %}
+                            <option value="{{i.id}}">{{ i.coursename }}</option>
+{% endfor %}
+
+    </select>
+
+        <label for="uname"><b>batch</b></label>
+    <select name="batch">
+        {% for i in key3 %}
+                            <option value="{{i.id}}">{{ i.batchname }}</option>
+        {% endfor %}
+
+    </select><br>
+
+        <label for="uname"><b>category</b></label>
+    <select name="category">
+        {% for i in key4 %}
+                            <option>{{ i.category }}</option>
+        {% endfor %}
+
+    </select><br>
+    <label for="uname"><b>subcategory</b></label>
+    <select name="subcategory">
+        {% for i in key6 %}
+                            <option>{{ i.subcategory }}</option>
+        {% endfor %}
+
+
+    </select><br>
+
+<!--    <label for="uname"><b>date</b></label>-->
+<!--    <select name="date">-->
+<!--        {% for i in key4 %}-->
+<!--                            <option>{{ i.date }}</option>-->
+<!--        {% endfor %}-->
+
+
+<!--    </select><br>-->
+        <label for="Amount"><b>paidamount</b></label>
+        <input type="text" placeholder="enter amount" name="paid" required>
+
+    <button type="submit">Paid</button>
+
+</form>
+<!--    {% if key4 != None %}-->
+    <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>FirstName</th>
+                  <th>Course</th>
+                  <th>Batch</th>
+                  <th>FeeCategory</th>
+                  <th>SubCategory</th>
+                  <th>Date</th>
+                  <th>Duedate</th>
+                  <th>Amount</th>
+                  <th>balance</th>
+                  <th>Fine</th>
+            {% for i in key5 %}
+                    <tr>
+                    <td>{{ i.id}}</td>
+                    <td>{{ i.admissionnumber.FirstName }}</td>
+                    <td>{{ i.coursename.coursename }}</td>
+                    <td>{{ i.batchname.batchname }}</td>
+                    <td>{{ i.feecategory }}</td>
+                    <td>{{ i.subcategory }}</td>
+                    <td>{{ i.date | date:'Y-m-d' }}</td>
+                    <td>{{ i.duedate | date:'Y-m-d' }}</td>
+                    <td>{{ i.amt }}</td>
+                    <td>{{ i.balance }}</td>
+                    <td> {{ i.fine }}</td>
+
+                </tr>
+
+            {% endfor %}
+                {{ msg }}
+<!--{% endif %}-->
+                    </thead></table>
+    </div>
+{% endblock %}

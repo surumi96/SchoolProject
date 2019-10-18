@@ -89,12 +89,35 @@ class Bloodgroup(models.Model):
 
 class Timetable(models.Model):
     Day=models.CharField(null=True, blank=True, max_length=255)
-    subject1=models.CharField(null=True, blank=True,max_length=255)
-    subject2=models.CharField(null=True, blank=True,max_length=255)
-    subject3=models.CharField(null=True, blank=True,max_length=255)
-    subject4=models.CharField(null=True, blank=True,max_length=255)
-    subject5=models.CharField(null=True, blank=True,max_length=255)
-    subject6=models.CharField(null=True, blank=True,max_length=255)
-    batchname=models.ForeignKey(Batch,null=True,blank=True, on_delete=models.PROTECT)
+    subject1=models.CharField(null=True, blank=True, max_length=255)
+    subject2=models.CharField(null=True, blank=True, max_length=255)
+    subject3=models.CharField(null=True, blank=True, max_length=255)
+    subject4=models.CharField(null=True, blank=True, max_length=255)
+    subject5=models.CharField(null=True, blank=True, max_length=255)
+    subject6=models.CharField(null=True, blank=True, max_length=255)
+    batchname=models.ForeignKey(Batch, null=True, blank=True, on_delete=models.PROTECT)
+
+class Category(models.Model):
+        category = models.CharField(null=True, blank=True, max_length=255)
+        academicyear = models.ForeignKey(Academicyear, null=True, blank=True, on_delete=models.PROTECT)
+        course = models.ForeignKey(Course, null=True, blank=True, max_length=255, on_delete=models.PROTECT)
+        subcategory = models.CharField(null=True, blank=True, max_length=255)
+        amount = models.IntegerField(null=True,blank=True)
+
+class Fee(models.Model):
+    coursename=models.ForeignKey(Course,null=True, blank=True, on_delete=models.PROTECT)
+    batchname=models.ForeignKey(Batch, null=True, blank=True, on_delete=models.PROTECT)
+    feecategory=models.CharField(null=True, blank=True, max_length=255)
+    subcategory=models.CharField(null=True, blank=True, max_length=255)
+    admissionnumber=models.ForeignKey(Student, null=True, blank=True, on_delete=models.CASCADE)
+    paid=models.IntegerField(null=True, blank=True)
+    balance=models.IntegerField(null=True, blank=True)
+    date = models.DateField(auto_now=True)
+    duedate = models.DateField(null=True,blank=True)
+    amt=models.IntegerField( null=True, blank=True)
+    fine=models.IntegerField(null=True, blank=True)
 
 
+class Subcategory(models.Model):
+    subcategory = models.CharField(null=True, blank=True, max_length=255)
+    course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.PROTECT)

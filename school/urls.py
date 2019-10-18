@@ -38,5 +38,9 @@ urlpatterns = [
     path('course/', views.Course_view, name="course"),
     path('academicyear/',views.Academicyear, name="academicyear"),
     path('batch/',views.Batch, name="batch"),
+    path('addfee/', views.addfee, name="addfee"),
+    path('category/', views.category, name="category"),
+    path('subcategory/',views.subcategory, name='subcategory'),
+    path('report/', views.report, name='report')
 
 ]
