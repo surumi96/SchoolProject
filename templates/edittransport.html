@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
+<form method='post'>{% csrf_token %}
 
+    <label for="name"><b>routename</b></label>
+    <input type="text" placeholder= "Enter routename" name="routename" required>
+
+    <label for="price"><b>transportprice</b></label>
+    <input type="text" placeholder= "Enter routename" name="transportprice" required>
+
+    <button type="submit">Update</button>
+    </form>
 </body>
 </html>

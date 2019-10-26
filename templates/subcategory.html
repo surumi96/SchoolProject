@@ -1,5 +1,8 @@
 {% extends 'admin.html' %}
 {% block content %}
+
+<div class="card">
+    <div class="card-body">
 <form method="post">{% csrf_token %}
 
     <label for="uname"><b>course</b></label>
@@ -12,5 +15,8 @@
  <input type="text" name="subcategory" required>
 
     <button type="submit">Submit</button>
+</form>
+    </div>
+</div>
 </form>
 {% endblock %}

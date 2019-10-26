@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'admin.html' %}
+{% block content %}
 
-</body>
-</html>
+<div class="card">
+    <div class="card-body">
+<form method="post">{% csrf_token %}
+
+     <label for="uname"><b>Vno</b></label>
+    <select name="busnumber">
+        {% for i in key1 %}
+        <option value="{{i.id}}">{{ i.busnumber}}</option>
+        {% endfor %}
+    </select>
+<label for="uname"><b>VehicleStop</b></label>
+ <input type="text" name="busstop" required>
+
+    <button type="submit">Save</button>
+</form>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+    <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+
+<tr>
+    <th>V.No</th>
+    <th>VehicleStop</th>
+</tr>
+            {% for i in key2 %}
+                    <tr>
+                    <td>{{i.bno.busnumber}}</td>
+                    <td>{{ i.busstop}}</td>
+                   <!---->
+
+                </tr>
+<!---->
+            {% endfor %}
+                    </thead></table>
+    </div>
+</div>
+{% endblock %}
+

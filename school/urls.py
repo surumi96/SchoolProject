@@ -41,6 +41,12 @@ urlpatterns = [
     path('addfee/', views.addfee, name="addfee"),
     path('category/', views.category, name="category"),
     path('subcategory/',views.subcategory, name='subcategory'),
-    path('report/', views.report, name='report')
-
+    path('report/', views.report, name='report'),
+    path('transport/', views.transport, name='transport'),
+    path('addtransport/', views.addtransport, name='addtransport'),
+    path('edittransport/<int:id>/', views.edittransport, name="edittransport"),
+    path('assign/', views.assign, name="assign"),
+    path('busdetails/',views.busdetails, name='busdetails'),
+    path('busstop/', views.busstop, name='busstop'),
+    path('busroute/', views.busroute, name='busroute')
 ]

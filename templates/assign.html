@@ -1,0 +1,69 @@
+{% extends 'admin.html' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+<table style="width:100%" border="1">
+<!--    <a href="/school/addtransport/" name="submit">add</a></br>-->
+    <tr>
+        <form method="post">{% csrf_token %}
+     <label for="uname"><b>Vehiclestop</b></label>
+    <select name="busstop">
+        {% for i in key1 %}
+        <option value="{{i.id}}">{{ i.busstop }}</option>
+        {% endfor %}
+    </select>
+            <label for="uname"><b>Vehicleroute</b></label>
+    <select name="busroute">
+        {% for i in key2 %}
+        <option value="{{i.id}}">{{ i.routename }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="uname"><b>droptime</b></label>
+ <input type="text" name="droptime" required>
+
+    <label for="uname"><b>picktime</b></label>
+ <input type="text" name="picktime" required><br>
+
+    <label for="uname"><b>amount</b></label>
+ <input type="text" name="transportprice" required>
+
+       <button type="submit">submit</button>
+
+        </form>
+    </tr>
+</table>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+    <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+
+<tr>
+    <th>VehicleStop</th>
+    <th>vehicleRoute</th>
+    <th>Drop</th>
+    <th>Pick</th>
+    <th>Amount</th>
+</tr>
+            {% for i in key3 %}
+                    <tr>
+                    <td>{{ i.busstop.busstop }}</td>
+                    <td>{{i.route.routename}}</td>
+                    <td>{{i.Drop}}</td>
+                    <td>{{i.pick}}</td>
+                    <td>{{i.transportprice}}</td>
+<!---->
+
+                </tr>
+<!---->
+            {% endfor %}
+                    </thead></table>
+    </div>
+</div>
+{% endblock %}
+
+

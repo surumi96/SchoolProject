@@ -121,3 +121,42 @@ class Fee(models.Model):
 class Subcategory(models.Model):
     subcategory = models.CharField(null=True, blank=True, max_length=255)
     course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.PROTECT)
+
+
+class Busdetails(models.Model):
+    busnumber=models.IntegerField(null=True,blank=True,)
+    buscapacity=models.IntegerField(null=True,blank=True)
+    driver=models.CharField(max_length=255, null=True,blank=True,)
+
+class Busstop(models.Model):
+    busstop=models.CharField(max_length=255, null=True,blank=True)
+    busroute=models.CharField(max_length=255, null=True,blank=True)
+    description=models.CharField(max_length=255, null=True,blank=True)
+    bno=models.ForeignKey(Busdetails,null=True,blank=True,on_delete=models.PROTECT)
+
+
+class Busroute(models.Model):
+    routename= models.CharField(max_length=255,null=True,blank=True)
+    desscription= models.CharField(max_length=255,null=True,blank=True)
+    busno=models.ForeignKey(Busdetails,null=True,blank=True,on_delete=models.PROTECT)
+
+class Assign(models.Model):
+    busstop = models.ForeignKey(Busstop,null=True, blank=True, on_delete=models.PROTECT)
+    transportprice = models.IntegerField(null=True, blank=True)
+    route = models.ForeignKey(Busroute,max_length=255, null=True,blank=True,on_delete=models.PROTECT)
+    pick = models.CharField(max_length=255, null=True,blank=True)
+    Drop = models.CharField(max_length=255, null=True,blank=True)
+
+
+class Transport(models.Model):
+    admissionnumber=models.ForeignKey(Student,null=True, blank=True, on_delete=models.PROTECT)
+    coursename=models.ForeignKey(Course,null=True,blank=True, on_delete=models.PROTECT)
+    batchname=models.ForeignKey(Batch, null=True, blank=True, on_delete=models.PROTECT)
+    route=models.ForeignKey(Assign, null=True, blank=True, on_delete=models.PROTECT)
+
+
+
+
+
+
+

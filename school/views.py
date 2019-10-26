@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from datetime import date
 from . import models
-from .models import Book, Order, Student, Timetable, Category
+from .models import Book, Order, Student, Timetable, Category, Transport, Assign, Busdetails, Busstop,Busroute
 from django.contrib import messages
 from datetime import datetime, timedelta
 
@@ -377,8 +377,8 @@ def addfee(request):
         obj.paid = paid
         # print(ob2.balance,'__________(((((())))))))))_________')
         # print(balance,'_______________________________')
-        a=models.Category.objects.get(category=feecategory)
-        print('bbbbbbbbb',a.amount)
+        a = models.Category.objects.get(category=feecategory)
+        print('bbbbbbbbb', a.amount)
 
         if balance == 0:
             obj.balance = int(a.amount) - int(paid)
@@ -399,7 +399,8 @@ def addfee(request):
         obj.save()
         ob = models.Fee.objects.filter(admissionnumber=admissionnumber)
 
-    return render(request, 'addfee.html', {'key1': obj1, 'key2': obj2, 'key3': obj3, 'key4': obj4, 'key5': ob, 'key6':obj5})
+    return render(request, 'addfee.html',
+                  {'key1': obj1, 'key2': obj2, 'key3': obj3, 'key4': obj4, 'key5': ob, 'key6': obj5})
 
 
 def category(request):
@@ -437,21 +438,158 @@ def subcategory(request):
         obj.subcategory = subcategory
         obj.save()
 
-    return render(request, 'subcategory.html', {'key1': obj1, 'key2':obj2})
-
+    return render(request, 'subcategory.html', {'key1': obj1, 'key2': obj2})
 
 
 def report(request):
-    obj1=models.Course.objects.all()
-    obj2=models.Batch.objects.all()
+    obj1 = models.Transport.objects.all()
+    obj2 = models.Batch.objects.all()
 
-    if request.method=="POST":
-        course=request.POST.get("coursename")
-        batch=request.POST.get("batchname")
+    if request.method == "POST":
+        course = request.POST.get("coursename")
+        batch = request.POST.get("batchname")
 
-        obj=category()
-        obj.course=models.Course.objects.all()
-        obj.batch=models.Batch.objects.all()
+        obj = category()
+        obj.course = models.Course.objects.all()
+        obj.batch = models.Batch.objects.all()
         obj.save()
 
-    return render(request, 'report.html', {'key1':obj1,'key2':obj2})
+    return render(request, 'report.html', {'key1': obj1, 'key2': obj2})
+
+
+
+
+def addtransport(request):
+    obj1 = models.Transport.objects.all()
+    print(obj1)
+    if request.method == 'POST':
+        name = request.POST.get("routename")
+        price = request.POST.get("transportprice")
+        print(name, price)
+        obj = Transport()
+        obj.routename = name
+        obj.transportprice = price
+        obj.save()
+        return redirect('transport')
+
+    return render(request, 'addtransport.html', {'key1': obj1})
+
+
+def edittransport(request, id):
+    obj = Transport.objects.get(id=id)
+    if request.method == 'POST':
+        name = request.POST.get("routename")
+        price = request.POST.get("transportprice")
+
+        obj.routename = name
+        obj.transportprice = price
+        obj.save()
+
+        return redirect('transport')
+
+    return render(request, 'edittransport.html', {'key': obj})
+
+
+def transport(request):
+    ob = ''
+    obj1 = models.Student.objects.all()
+    obj2 = models.Course.objects.all()
+    obj3 = models.Batch.objects.all()
+    obj4 = models.Busroute.objects.all()
+    obj5=models.Transport.objects.all()
+    obj6=models.Assign.objects.all()
+    if request.method == "POST":
+        admissionnumber = request.POST.get("admissionnumber")
+        print(admissionnumber, '_____________{{{{{{{{{{{{}}}}}}}}}}}}}}')
+        course = request.POST.get("coursename")
+        batch = request.POST.get("batchname")
+        route = request.POST.get("routename")
+        amount = request.POST.get("amount")
+        ob = models.Transport.objects.filter(route=route)
+
+        obj = Transport()
+        obj.admissionnumber = models.Student.objects.get(id=admissionnumber)
+        obj.coursename = models.Course.objects.get(id=course)
+        obj.batchname = models.Batch.objects.get(id=batch)
+        obj.route = models.Assign.objects.get(id=route)
+        obj.save()
+
+
+    return render(request, 'transport.html',
+                  {'key1': obj1, 'key2': obj2, 'key3': obj3, 'key4': obj4, 'key5': ob, 'key6':obj6})
+
+
+def busdetails(request):
+    obj1 = models.Busdetails.objects.all()
+    if request.method == 'POST':
+        busnumber = request.POST.get("busnumber")
+        buscapacity = request.POST.get("buscapacity")
+        driver = request.POST.get("driver")
+
+        obj = Busdetails()
+        obj.busnumber = busnumber
+        obj.buscapacity = buscapacity
+        obj.driver = driver
+        obj.save()
+    return render(request, 'busdetails.html', {'key1': obj1})
+
+
+def busstop(request):
+    obj1 = models.Busdetails.objects.all()
+    obj2 = models.Busstop.objects.all()
+    if request.method == 'POST':
+        busstop = request.POST.get("busstop")
+        busroute = request.POST.get("busroute")
+        description = request.POST.get("description")
+        bno = request.POST.get("busnumber")
+
+        obj = Busstop()
+        obj.busstop = busstop
+        obj.busroute = busroute
+        obj.bno=models.Busdetails.objects.get(id=bno)
+        obj.description = description
+
+        obj.save()
+
+    return render(request, 'busstop.html', {'key1': obj1,'key2':obj2})
+
+
+def assign(request):
+    obj1 = models.Busstop.objects.all()
+    obj2=models.Busroute.objects.all()
+    obj3=models.Assign.objects.all()
+
+    if request.method == "POST":
+        busstop = request.POST.get("busstop")
+        busroute =request.POST.get("busroute")
+        drop = request.POST.get("droptime")
+        pick = request.POST.get("picktime")
+        amount = request.POST.get("transportprice")
+
+        obj = models.Assign()
+        obj.busstop = models.Busstop.objects.get(id=busstop)
+        obj.route=models.Busroute.objects.get(id=busroute)
+        obj.Drop=drop
+        obj.pick=pick
+        obj.transportprice = amount
+        obj.save()
+
+    return render(request, 'assign.html', {"key1": obj1,'key2':obj2,'key3':obj3})
+
+def busroute(request):
+    obj1=models.Busroute.objects.all()
+    obj2=models.Busdetails.objects.all()
+    if request.method=='POST':
+        route=request.POST.get("busroute")
+        busno=request.POST.get("busnumber")
+        description=request.POST.get("description")
+
+        obj=models.Busroute()
+        obj.busno=models.Busdetails.objects.get(id=busno)
+        obj.routename=route
+        obj.desscription=description
+        obj.save()
+
+    return render(request,'busroute.html', {'key1':obj1,'key2':obj2})
+
+
