@@ -97,3 +97,32 @@ else if(x=="No"){
     alert("No such books")}
 </script>
 {% endblock %}
+
+
+#
+        # a = models.Feeallocation.objects.filter(amount=amount)
+        #
+        #
+        # if balance > 0:
+        #
+        #     if len(a) < 0 and len(a) == 0:
+        #         obj = models.Feecollection()
+        #         obj.course = models.Course.objects.get(id=course)
+        #         obj.paid = paid
+        #         obj.save()
+        # else:
+        #     msg = "already paid"
+
+        # try:
+        #     ob = models.Feecollection.objects.filter(category__category=category,admission=admno).last()
+        #     balance = ob.balance
+        # except:
+        #     balance = 0
+        #     obj = models.Feecollection.objects.all()
+        #     ob = models.Feeallocation.objects.filter(category__category=category,admission=admno).last()
+        #
+        # if balance == 0:
+        #     obj.balance = int(ob.amount) - int(paid)
+        # if balance != 0:
+        #     obj.balance = balance - int(paid)
+        #     obj.save()

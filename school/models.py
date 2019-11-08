@@ -154,9 +154,26 @@ class Transport(models.Model):
     batchname=models.ForeignKey(Batch, null=True, blank=True, on_delete=models.PROTECT)
     route=models.ForeignKey(Assign, null=True, blank=True, on_delete=models.PROTECT)
 
+class Feecategory(models.Model):
+    category=models.CharField(max_length=255,null=True,blank=True)
+
+class Feetype(models.Model):
+    feetype=models.CharField(max_length=255,null=True,blank=True)
 
 
+class Feeallocation(models.Model):
+    category=models.ForeignKey(Feecategory,null=True,blank=True,on_delete=models.PROTECT)
+    type=models.ForeignKey(Feetype,null=True,blank=True,on_delete=models.PROTECT)
+    course=models.ForeignKey(Course,null=True,blank=True,on_delete=models.PROTECT)
+    amount=models.IntegerField()
+    fromdate = models.DateField(auto_now=True)
+    Duedate = models.DateField(null=True, blank=True)
 
 
-
-
+class Feecollection(models.Model):
+    fee=models.ForeignKey(Feeallocation,null=True,blank=True,on_delete=models.PROTECT)
+    admission=models.ForeignKey(Student,null=True,blank=True,on_delete=models.PROTECT)
+    course=models.ForeignKey(Course,null=True,blank=True,on_delete=models.PROTECT)
+    paid=models.IntegerField(null=True, blank=True)
+    balance = models.IntegerField(null=True, blank=True)
+    status=models.CharField(max_length=255)

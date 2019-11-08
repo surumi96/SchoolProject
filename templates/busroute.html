@@ -1,47 +1,36 @@
 {% extends 'admin.html' %}
 {% block content %}
-
-<div class="card">
-    <div class="card-body">
-<form method="post">{% csrf_token %}
-
-<form method="post">{% csrf_token %}
-
-     <label for="uname"><b>Vno</b></label>
-    <select name="busnumber">
-        {% for i in key2 %}
-        <option value="{{i.id}}">{{ i.busnumber}}</option>
-        {% endfor %}
-    </select>
-
-    <label for="uname"><b>VehicleRoute</b></label>
- <input type="text" name="busroute" required>
-
-
-    <label for="uname"><b>Description</b></label>
-    <textarea name="description" required></textarea>
-    <button type="submit">Save</button>
-
-
-</form>
-    </div>
-</div>
 <div class="card">
     <div class="card-body">
     <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
-
+<a href="/school/routeadd/">
+    <button type="submit" style="float:right">add</button>
+</a>
 <tr>
     <th>VehicleNO</th>
     <th>Vehicleroute</th>
-    <th>Description</th>
+    <th>edit</th>
+    <th>delete</th>
 
             {% for i in key1 %}
                     <tr>
                     <td>{{i.busno.busnumber}}</td>
                     <td>{{ i.routename}}</td>
-                    <td>{{ i.desscription }}</td>
+    <td>
+
+        <a href="/school/routeedit/{{i.id}}">
+        <button type="submit">edit</button>
+        </a>
+        <input name="edit" value="{{ i.id }}" hidden>
+    </td>
+                        <td>
+                    <form method="post">{% csrf_token %}
+                    <button type="submit">delete</button>
+                    <input name="delete" value="{{i.id}}" hidden>
+                    </form>
+                </td>
                 </tr>
 
             {% endfor %}

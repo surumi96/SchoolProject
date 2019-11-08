@@ -28,11 +28,12 @@
 
     <label for="uname"><b>route</b></label>
     <select name="routename">
-        {% for i in key4 %}
-        <option value="{{i.id}}">{{ i.routename}}</option>
+        {% for i in key6 %}
+        <option value="{{i.id}}">{{ i.route.routename}}</option>
         {% endfor %}
     </select>
     <button type="submit">Submit</button>
+        <input type="text" value="{{msg}}" id ='msg' name="msg" hidden>
     </form>
     </div>
 </div>
@@ -81,6 +82,17 @@
 
 
 
+
 {% endblock %}
+    {% block script %}
+    <script>
+var x=document.getElementById("msg").value;
+console.log(x)
+    if(x=='yes'){
+    alert("already assigned")
+    }
+    </script>
+    {% endblock %}
+
 
 

@@ -1,40 +1,40 @@
 {% extends 'admin.html' %}
 {% block content %}
-
-<div class="card">
-    <div class="card-body">
-<form method="post">{% csrf_token %}
-
-     <label for="uname"><b>Vno</b></label>
-    <select name="busnumber">
-        {% for i in key1 %}
-        <option value="{{i.id}}">{{ i.busnumber}}</option>
-        {% endfor %}
-    </select>
-<label for="uname"><b>VehicleStop</b></label>
- <input type="text" name="busstop" required>
-
-    <button type="submit">Save</button>
-</form>
-    </div>
-</div>
 <div class="card">
     <div class="card-body">
     <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
-
+                <a href="/school/stopadd/">
+<buttuon type="submit" name="add" style="float:right">Add</buttuon>
+</a>
 <tr>
     <th>V.No</th>
     <th>VehicleStop</th>
+    <th>edit</th>
+    <th>delete</th>
 </tr>
             {% for i in key2 %}
                     <tr>
                     <td>{{i.bno.busnumber}}</td>
                     <td>{{ i.busstop}}</td>
-                   <!---->
+<td>
 
-                </tr>
+        <a href="/school/stopedit/{{i.id}}">
+        <button type="submit">edit</button>
+        </a>
+        <input name="edit" value="{{ i.id }}" hidden>
+    </td>
+                        <td>
+                    <form method="post">{% csrf_token %}
+                    <button type="submit">delete</button>
+                    <input name="delete" value="{{i.id}}" hidden>
+                    </form>
+                </td>
+
+
+
+
 <!---->
             {% endfor %}
                     </thead></table>

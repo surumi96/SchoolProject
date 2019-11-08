@@ -1,43 +1,39 @@
 {% extends 'admin.html' %}
 {% block content %}
-
-<div class="card">
-    <div class="card-body">
-<form method="post">{% csrf_token %}
-
-<label for="uname"><b>VehicleNumber</b></label>
- <input type="text" name="busnumber" required>
-
-
-
-    <label for="uname"><b>VehicleCapacity</b></label>
- <input type="text" name="buscapacity" required>
-
-
-    <label for="uname"><b>Driver</b></label>
- <input type="text" name="driver" required>
-
-<button type="submit">Save</button>
-</form>
-    </div>
-</div>
 <div class="card">
     <div class="card-body">
     <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
-
+                <a href="/school/busadd/">
+<buttuon type="submit" name="add" style="float:right">Add</buttuon>
+</a>
+<br>
 <tr>
     <th>VehicleNumber</th>
     <th>VehicleCapacity</th>
     <th>Driver</th>
+    <th>edit</th>
+    <th>delete</th>
 </tr>
             {% for i in key1 %}
                     <tr>
                     <td>{{ i.busnumber}}</td>
                     <td>{{ i.buscapacity }}</td>
                     <td>{{ i.driver }}</td>
+                    <td>
 
+        <a href="/school/busedit/{{i.id}}">
+        <button type="submit">edit</button>
+        </a>
+        <input name="edit" value="{{ i.id }}" hidden>
+    </td>
+                        <td>
+                    <form method="post">{% csrf_token %}
+                    <button type="submit">delete</button>
+                    <input name="delete" value="{{i.id}}" hidden>
+                    </form>
+                </td>
 
                 </tr>
 

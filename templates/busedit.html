@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+<div class="cardbody">
+    <div class="boxbody">
+ <form method="post">{% csrf_token %}
+
+
+     <label for="uname"><b>VehicleNumber</b></label>
+    <input type="text" name="busnumber" value="{{ key1.busnumber }}">
+
+
+
+    <label for="uname"><b>VehicleCapacity</b></label>
+   <input type="text" name="buscapacity" value="{{ key1.buscapacity}}">
+
+
+    <label for="uname"><b>Driver</b></label>
+   <input type="text" name="driver" value="{{ key1.driver }}">
+     <button type="submit">update</button>
+ </form>
+
+    </div>
+</div>
+</div>
+</body>
+</html>

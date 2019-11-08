@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Teacher, Student, Batch,Academicyear,Course,Fee,Category,Subcategory,Transport,Assign,Busdetails,Busstop
-from.models import Busroute
+from.models import Busroute,Feecategory,Feetype,Feeallocation,Feecollection
 
 # Register your models here.
 admin.site.register(Student)
@@ -16,3 +16,7 @@ admin.site.register(Assign)
 admin.site.register(Busdetails)
 admin.site.register(Busstop)
 admin.site.register(Busroute)
+admin.site.register(Feecategory)
+admin.site.register(Feetype)
+admin.site.register(Feeallocation)
+admin.site.register(Feecollection)
